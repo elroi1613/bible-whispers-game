@@ -146,7 +146,7 @@ export function PlayerSetup({
       </main>
 
       {/* Start Button */}
-      <footer className="p-4 pb-8 max-w-md mx-auto w-full relative z-10">
+      <footer className="p-4 pb-8 max-w-md mx-auto w-full relative z-10 flex flex-col gap-4">
         <Button
           onClick={onStartGame}
           disabled={!canStart}
@@ -155,6 +155,15 @@ export function PlayerSetup({
           <Play className="w-6 h-6 mr-2" />
           INICIAR PARTIDA
         </Button>
+
+        <div className="text-center space-y-1">
+          <p className="text-xs text-muted-foreground font-body">
+            Powered by <a href="https://labs.elroi.cloud" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">ELROI Labs</a>
+          </p>
+          <p className="text-xs text-muted-foreground font-body">
+            <a href="https://elroi.cloud" target="_blank" rel="noopener noreferrer" className="text-neon-violet hover:underline">elroi.cloud</a> - Una comunidad cristiana
+          </p>
+        </div>
       </footer>
     </div>
   );

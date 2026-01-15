@@ -122,7 +122,7 @@ export const biblicalWords: WordCategory[] = [
     name: "Pecados y Caídas",
     words: [
       "Idolatría",
-      "For nicación",
+      "Fornicación",
       "Adulterio",
       "Mentira",
       "Soberbia",
