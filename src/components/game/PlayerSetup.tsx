@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, X, Users, Play, Trash2 } from 'lucide-react';
+import { Plus, X, Users, Play, Trash2, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import type { Player } from '@/hooks/useGameState';
@@ -37,25 +37,37 @@ export function PlayerSetup({
   const canStart = players.length >= 3;
 
   return (
-    <div className="min-h-screen gradient-parchment flex flex-col">
+    <div className="min-h-screen gradient-dark flex flex-col relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-neon-violet/10 rounded-full blur-3xl" />
+        <div className="absolute top-40 right-10 w-40 h-40 bg-neon-blue/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-1/2 w-60 h-60 bg-neon-gold/5 rounded-full blur-3xl" />
+      </div>
+
       {/* Header */}
-      <header className="gradient-sacred p-6 shadow-elevated">
-        <div className="text-center">
-          <h1 className="font-display text-2xl font-bold text-primary-foreground mb-1">
-            El Impostor Cristiano
-          </h1>
-          <p className="text-primary-foreground/80 text-sm font-body">
+      <header className="relative gradient-neon p-6 shadow-elevated">
+        <div className="absolute inset-0 bg-black/20" />
+        <div className="relative text-center">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <Sparkles className="w-6 h-6 text-accent animate-pulse" />
+            <h1 className="font-display text-2xl font-bold text-primary-foreground tracking-wider neon-text-glow">
+              EL IMPOSTOR CRISTIANO
+            </h1>
+            <Sparkles className="w-6 h-6 text-accent animate-pulse" />
+          </div>
+          <p className="text-primary-foreground/80 text-sm font-body tracking-wide">
             Prepara tu partida
           </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 p-4 max-w-md mx-auto w-full">
+      <main className="flex-1 p-4 max-w-md mx-auto w-full relative z-10">
         {/* Add Player Section */}
-        <div className="bg-card rounded-lg shadow-card p-4 mb-4 animate-fade-in">
-          <label className="block font-display text-sm font-semibold text-foreground mb-2">
-            Agregar Jugador
+        <div className="gradient-card rounded-xl shadow-card p-4 mb-4 animate-fade-in border border-primary/30">
+          <label className="block font-display text-sm font-semibold text-accent mb-2 tracking-wide">
+            AGREGAR JUGADOR
           </label>
           <div className="flex gap-2">
             <Input
@@ -64,13 +76,13 @@ export function PlayerSetup({
               onChange={(e) => setNewPlayerName(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Nombre del jugador"
-              className="flex-1 font-body"
+              className="flex-1 font-body bg-muted/50 border-primary/30 focus:border-primary text-foreground placeholder:text-muted-foreground"
               maxLength={20}
             />
             <Button
               onClick={handleAddPlayer}
               disabled={!newPlayerName.trim()}
-              className="gradient-sacred hover:opacity-90 transition-opacity"
+              className="gradient-violet-blue hover:opacity-90 transition-opacity shadow-glow-violet"
             >
               <Plus className="w-5 h-5" />
             </Button>
@@ -78,12 +90,12 @@ export function PlayerSetup({
         </div>
 
         {/* Players List */}
-        <div className="bg-card rounded-lg shadow-card p-4 mb-4 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+        <div className="gradient-card rounded-xl shadow-card p-4 mb-4 animate-fade-in border border-primary/30" style={{ animationDelay: '0.1s' }}>
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <Users className="w-5 h-5 text-primary" />
-              <span className="font-display font-semibold text-foreground">
-                Jugadores ({players.length})
+              <Users className="w-5 h-5 text-neon-violet" />
+              <span className="font-display font-semibold text-foreground tracking-wide">
+                JUGADORES ({players.length})
               </span>
             </div>
             {players.length > 0 && (
@@ -100,7 +112,7 @@ export function PlayerSetup({
           </div>
 
           {players.length === 0 ? (
-            <p className="text-muted-foreground text-center py-8 font-body italic">
+            <p className="text-muted-foreground text-center py-8 font-body">
               Agrega al menos 3 jugadores para comenzar
             </p>
           ) : (
@@ -108,10 +120,10 @@ export function PlayerSetup({
               {players.map((player, index) => (
                 <li
                   key={player.id}
-                  className="flex items-center justify-between bg-secondary/50 rounded-md px-3 py-2 animate-scale-in"
+                  className="flex items-center justify-between bg-secondary/30 rounded-lg px-4 py-3 animate-scale-in border border-primary/20 hover:border-primary/40 transition-colors"
                   style={{ animationDelay: `${index * 0.05}s` }}
                 >
-                  <span className="font-body text-foreground">{player.name}</span>
+                  <span className="font-body text-foreground font-medium">{player.name}</span>
                   <button
                     onClick={() => onRemovePlayer(player.id)}
                     className="text-muted-foreground hover:text-destructive transition-colors p-1"
@@ -127,21 +139,21 @@ export function PlayerSetup({
 
         {/* Minimum players warning */}
         {players.length > 0 && players.length < 3 && (
-          <p className="text-center text-amber-600 text-sm mb-4 font-body animate-fade-in">
+          <p className="text-center text-accent text-sm mb-4 font-body animate-fade-in">
             Necesitas al menos {3 - players.length} jugador{3 - players.length !== 1 ? 'es' : ''} más
           </p>
         )}
       </main>
 
       {/* Start Button */}
-      <footer className="p-4 pb-8 max-w-md mx-auto w-full">
+      <footer className="p-4 pb-8 max-w-md mx-auto w-full relative z-10">
         <Button
           onClick={onStartGame}
           disabled={!canStart}
-          className="w-full py-6 text-lg font-display gradient-gold text-foreground shadow-elevated hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed animate-pulse-glow"
+          className="w-full py-6 text-lg font-display gradient-gold text-accent-foreground shadow-glow-gold hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed animate-pulse-gold tracking-wider"
         >
           <Play className="w-6 h-6 mr-2" />
-          Iniciar Partida
+          INICIAR PARTIDA
         </Button>
       </footer>
     </div>

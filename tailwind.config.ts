@@ -53,6 +53,13 @@ export default {
           DEFAULT: "hsl(var(--gold))",
           dark: "hsl(var(--gold-dark))",
         },
+        neon: {
+          blue: "hsl(var(--neon-blue))",
+          violet: "hsl(var(--neon-violet))",
+          gold: "hsl(var(--neon-gold))",
+          pink: "hsl(var(--neon-pink))",
+          cyan: "hsl(var(--neon-cyan))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -65,8 +72,8 @@ export default {
         },
       },
       fontFamily: {
-        display: ['Cinzel', 'serif'],
-        body: ['Lora', 'serif'],
+        display: ['Orbitron', 'sans-serif'],
+        body: ['Rajdhani', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",
